@@ -1,15 +1,15 @@
-package com.hms.enteit;
+package com.hms.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -18,22 +18,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name = "prescriptions")
+@Table(name = "prescription_medicines")
 @Setter
 @Getter
 @NoArgsConstructor
-public class Prescription {
+public class PrescriptionMedicine {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String diagnosis;
-    private String notes;
-    private LocalDate followUpDate;
+    private String dosage;
+    private String frequency;
+    private String duration;
+    private String instructions;
 
-    @OneToOne
-    @JoinColumn(name = "appointment_id")
-    private Appointment appointment;
+    @ManyToOne
+    @JoinColumn(name = "prescription_id")
+    private Prescription prescription;
 
-    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
-    private List<PrescriptionMedicine> prescriptionMedicines;
+    @ManyToOne
+    @JoinColumn(name = "medicine_id")
+    private Medicine medicine;
 }

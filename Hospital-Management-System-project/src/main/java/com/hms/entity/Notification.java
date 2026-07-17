@@ -1,4 +1,4 @@
-package com.hms.enteit;
+package com.hms.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

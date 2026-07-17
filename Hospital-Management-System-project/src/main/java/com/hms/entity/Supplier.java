@@ -1,6 +1,6 @@
-package com.hms.enteit;
+package com.hms.entity;
 
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,34 +17,21 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
-@Table(name = "doctors")
+@Table(name = "suppliers")
 @Getter 
 @Setter 
 @NoArgsConstructor
-public class Doctor {
+public class Supplier {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String doctorCode;
-    private String specialization;
-    private String qualification;
-    private Integer experience;
-    private Double consultationFee;
-    private String licenseNumber;
-    private String availability;
+    private String supplierName;
+    private String email;
+    private String phone;
+    private String address;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @OneToMany(mappedBy = "doctor")
-    private List<Appointment> appointments;
-
-    @OneToMany(mappedBy = "doctor")
-    private List<Review> reviews;
+    @OneToMany(mappedBy = "supplier")
+    private List<Inventory> inventories;
 }

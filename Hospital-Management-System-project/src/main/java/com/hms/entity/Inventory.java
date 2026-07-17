@@ -1,4 +1,4 @@
-package com.hms.enteit;
+package com.hms.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,24 +17,23 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Entity
-@Table(name = "reviews")
-@Getter
+@Table(name = "inventories")
+@Getter 
 @Setter 
 @NoArgsConstructor
-public class Review {
+public class Inventory {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Integer rating;
-    private String comment;
-    private LocalDateTime createdAt;
+    private String itemName;
+    private Integer quantity;
+    private Double unitPrice;
+    private LocalDate expiryDate;
+    private Integer reorderLevel;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 }

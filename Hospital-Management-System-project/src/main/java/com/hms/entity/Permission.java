@@ -1,4 +1,4 @@
-package com.hms.enteit;
+package com.hms.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
-package com.hms.enteit;
+package com.hms.entity;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,24 +18,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name = "prescription_medicines")
-@Setter
-@Getter
+@Table(name = "doctors")
+@Getter 
+@Setter 
 @NoArgsConstructor
-public class PrescriptionMedicine {
+public class Doctor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String dosage;
-    private String frequency;
-    private String duration;
-    private String instructions;
+    private String doctorCode;
+    private String specialization;
+    private String qualification;
+    private Integer experience;
+    private Double consultationFee;
+    private String licenseNumber;
+    private String availability;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "prescription_id")
-    private Prescription prescription;
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    @ManyToOne
-    @JoinColumn(name = "medicine_id")
-    private Medicine medicine;
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Review> reviews;
 }
